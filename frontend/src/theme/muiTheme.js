@@ -5,7 +5,7 @@ const muiTheme = createMuiTheme({
 		bar: {
 			main: '#b3001b'
 		}
-	},
+	}
 });
 
 export default muiTheme;

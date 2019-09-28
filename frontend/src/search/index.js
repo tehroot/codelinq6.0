@@ -1,11 +1,16 @@
 import React from 'react';
 
-import Questionaire from './questionaire';
+import TagDrawer from './TagDrawer';
+import Results from './Results';
 
 function Search() {
+
 	return(
-		<Questionaire />
+		<React.Fragment>
+			<TagDrawer />
+			<Results />
+		</React.Fragment>
 	);
-};
+}
 
 export default Search;

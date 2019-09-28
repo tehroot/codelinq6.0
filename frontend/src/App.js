@@ -5,6 +5,8 @@ import muiTheme from './theme/muiTheme.js';
 
 import Shell from './shell';
 
+import Search from './search';
+
 const useStyles = makeStyles(theme => ({
 	app: {
 		display: 'flex',
@@ -14,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 		alignItems: 'center',
 		textAlign: 'center',
 
-		marginTop: '56px'
+		marginTop: '60px'
 	}
 }));
 
@@ -25,6 +27,7 @@ function App() {
 		<ThemeProvider theme={muiTheme}>
 			<Shell />
 			<div className={classes.app}>
+				<Search />
 			</div>
 		</ThemeProvider>
 	);
