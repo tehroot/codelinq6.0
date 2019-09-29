@@ -2,5 +2,9 @@
 	{
 		"name": "North Carolina",
 		"id": "NC"
+	},
+	{
+		"name": "Select your state...",
+		"id": "DUMMY"
 	}
 ]

@@ -39,13 +39,14 @@ const useStyles = makeStyles(theme => ({
 
 function TagDrawer(props) {
 	const classes = useStyles();
-	const { enabledtags, disabledtags, enabletag, disabletag } = props;
-
-	const [state, setState] = useState({
-		state: ''
-	});
+	const { state, setState, enabledtags, disabledtags, enabletag, disabletag, query } = props;
 	
 	const handleChange = event => {
+		if (event.target.name === 'state') {
+			query(event.target.value);
+		} else {
+			query();
+		}
 		setState(oldValues => ({
 			...oldValues,
 			[event.target.name]: event.target.value,

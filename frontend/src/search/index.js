@@ -14,15 +14,56 @@ const newtags = [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}, {id: 3, text: '
 
 function Search() {
 	const classes = useStyles();
-	const [tags, setTags] = useState({enabled: [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}], disabled: []});
+
+	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}], disabled: []}, state: 'DUMMY'});
+
+	var AWS = require('aws-sdk');
+	AWS.config.accessKeyId = 'AKIA5QZNTKY2LZLBOOKM';
+	AWS.config.secretAccessKey = 'tAxQIcG2Lzgt+6eADAgwCr/UOyC06QSxMSkCqXb5';
+	AWS.config.region = 'us-east-1';
+
+	var result = {Items: []};
+	
+		var docClient = new AWS.DynamoDB.DocumentClient();
+		var query = (statecode) => {
+			var setstatecode = ''
+			if (statecode) {
+				setstatecode = statecode;
+			} else if (statecode === 'DUMMY'){
+				return;
+			}
+			else {
+				setstatecode = state.state
+			} 
+			var params = {
+				TableName : "codelinc",
+				KeyConditionExpression: "#st = :st",
+				ExpressionAttributeNames: {
+					"#st": "State"
+				},
+				ExpressionAttributeValues: {
+					":st": setstatecode
+				}
+			};
+			
+			docClient.query(params, function(err, data) {
+			
+			if (err) {
+				console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+			} else {
+				console.log("Query succeeded.");
+				setState({...state,state: setstatecode, carddata: data.Items});
+				console.log(data.Items)
+			}
+		});}
 
 	const enabletag = (id) => {
-		var newEnabled = tags.enabled;
-		newEnabled.push(tags.disabled[tags.disabled.findIndex((element) => {
+		var newEnabled = state.tags.enabled;
+		newEnabled.push(state.tags.disabled[state.tags.disabled.findIndex((element) => {
 			return element.id === id;
 		})]);
 
-		var newDisabled = tags.disabled.filter((element) => {
+		var newDisabled = state.tags.disabled.filter((element) => {
 			return element.id !== id;
 		});
 
@@ -51,16 +92,16 @@ function Search() {
 
 		newDisabled = newDisabled.concat(appendTags);
 		
-		setTags({enabled: newEnabled, disabled: newDisabled});
+		setState({...state, tags: {enabled: newEnabled, disabled: newDisabled}});
 	};
 
 	const disabletag = (id) => {
-		var newDisabled = tags.disabled;
-		newDisabled.push(tags.enabled[tags.enabled.findIndex((element) => {
+		var newDisabled = state.tags.disabled;
+		newDisabled.push(state.tags.enabled[state.tags.enabled.findIndex((element) => {
 			return element.id === id;
 		})]);
 
-		var newEnabled = tags.enabled.filter((element) => {
+		var newEnabled = state.tags.enabled.filter((element) => {
 			return element.id !== id;
 		});
 
@@ -89,14 +130,15 @@ function Search() {
 
 		newDisabled = newDisabled.concat(appendTags);
 		
-		setTags({enabled: newEnabled, disabled: newDisabled});
+		setState({...state, tags: {enabled: newEnabled, disabled: newDisabled}});
+
 	};
 
 	return(
 		<div>
-			<TagDrawer enabledtags={tags.enabled} disabledtags={tags.disabled} enabletag={enabletag} disabletag={disabletag} />
+			<TagDrawer state={state} setState={setState} enabledtags={state.tags.enabled} disabledtags={state.tags.disabled} enabletag={enabletag} disabletag={disabletag} query={query} />
 			<div className={classes.content}>
-				<Results />
+				{state.state && <Results state={state} carddata={state.carddata} />}
 			</div>
 		</div>
 	);
