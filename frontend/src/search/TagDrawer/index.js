@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	tagWrapper: {
 		display: 'flex',
-		flex: 'wrap',
+		flexWrap: 'wrap',
 		padding: '10px'
 	},
 	tagHeader: {
