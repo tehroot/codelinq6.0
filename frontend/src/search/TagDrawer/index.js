@@ -8,7 +8,6 @@ import Divider from '@material-ui/core/Divider';
 import Tag from './Tag';
 import { Typography } from '@material-ui/core';
 
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -65,7 +64,6 @@ function TagDrawer(props) {
 				<Toolbar></Toolbar>
 
 				<FormControl className={classes.stateSelect}>
-					<InputLabel htmlFor="state">State</InputLabel>
 					<Select
 					value={state.state}
 					onChange={handleChange}
@@ -73,7 +71,11 @@ function TagDrawer(props) {
 						name: 'state',
 						id: 'state',
 					}}
+					displayEmpty
 					>
+						<MenuItem value="" disabled>
+							Select your state...
+						</MenuItem>
 						{states.map((element) => {
 							return(<MenuItem value={element.id}>{element.name}</MenuItem>)
 						})}

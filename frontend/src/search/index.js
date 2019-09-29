@@ -15,26 +15,23 @@ const newtags = [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}, {id: 3, text: '
 function Search() {
 	const classes = useStyles();
 
-	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}], disabled: []}, state: 'DUMMY'});
+	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}], disabled: []}, state: ''});
 
 	var AWS = require('aws-sdk');
 	AWS.config.accessKeyId = 'AKIA5QZNTKY2LZLBOOKM';
 	AWS.config.secretAccessKey = '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';
 	AWS.config.region = 'us-east-1';
-
-	var result = {Items: []};
 	
 		var docClient = new AWS.DynamoDB.DocumentClient();
 		var query = (statecode) => {
 			var setstatecode = ''
 			if (statecode) {
 				setstatecode = statecode;
-			} else if (statecode === 'DUMMY'){
-				return;
 			}
 			else {
 				setstatecode = state.state
-			} 
+			};
+
 			var params = {
 				TableName : "codelinc",
 				KeyConditionExpression: "#st = :st",
@@ -47,15 +44,15 @@ function Search() {
 			};
 			
 			docClient.query(params, function(err, data) {
-			
-			if (err) {
-				console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-			} else {
-				console.log("Query succeeded.");
-				setState({...state,state: setstatecode, carddata: data.Items});
-				console.log(data.Items)
-			}
-		});}
+				if (err) {
+					console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+				} else {
+					console.log("Query succeeded.");
+					setState({...state,state: setstatecode, carddata: data.Items});
+					console.log(data.Items)
+				}
+			});
+		}
 
 	const enabletag = (id) => {
 		var newEnabled = state.tags.enabled;
