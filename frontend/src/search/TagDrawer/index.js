@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,6 +7,13 @@ import Divider from '@material-ui/core/Divider';
 
 import Tag from './Tag';
 import { Typography } from '@material-ui/core';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+const states = require('./states.json');
 
 const drawerWidth = 300;
 
@@ -20,17 +27,30 @@ const useStyles = makeStyles(theme => ({
 	tagWrapper: {
 		display: 'flex',
 		flex: 'wrap',
-		padding: '5px'
+		padding: '10px'
 	},
 	tagHeader: {
 		marginTop: '15px'
+	},
+	stateSelect: {
+		margin: '15px 25px 5px 25px'
 	}
 }));
 
 function TagDrawer(props) {
 	const classes = useStyles();
-
 	const { enabledtags, disabledtags, enabletag, disabletag } = props;
+
+	const [state, setState] = useState({
+		state: ''
+	});
+	
+	const handleChange = event => {
+		setState(oldValues => ({
+			...oldValues,
+			[event.target.name]: event.target.value,
+		}));
+	};
 
 	return(
 		
@@ -42,14 +62,31 @@ function TagDrawer(props) {
 			}}
 			>
 				<Toolbar></Toolbar>
-				<Typography className={classes.tagHeader} variant="h6">Enabled Tags</Typography>
+
+				<FormControl className={classes.stateSelect}>
+					<InputLabel htmlFor="state">State</InputLabel>
+					<Select
+					value={state.state}
+					onChange={handleChange}
+					inputProps={{
+						name: 'state',
+						id: 'state',
+					}}
+					>
+						{states.map((element) => {
+							return(<MenuItem value={element.id}>{element.name}</MenuItem>)
+						})}
+					</Select>
+				</FormControl>
+
+				<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
 				<div className={classes.tagWrapper}>
 					{enabledtags.map(tag =>
 						<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
 					)}
 				</div>
 				<Divider className={classes.tagHeader} />
-				<Typography className={classes.tagHeader} variant="h6">Disabled Tags</Typography>
+				<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
 				<div className={classes.tagWrapper}>
 					{disabledtags.map(tag =>
 						<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
