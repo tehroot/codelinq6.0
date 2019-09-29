@@ -1,20 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Icon from '@material-ui/core/Icon';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
@@ -38,12 +29,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function ResultCard(props) {
   const classes = useStyles();
-  const {title, addressline, phone, email, website, eligibility, tags, description} = props;
-  const [expanded, setExpanded] = React.useState(false);
+  const {title, addressline, phone, email, website, eligibility, description} = props;
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  /* https://stackoverflow.com/a/8358141 */
+  function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      var intlCode = (match[1] ? '+1 ' : '')
+      return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+    }
+    return null
+  }
 
   return (
     <Card className={classes.card}>
@@ -73,7 +70,7 @@ export default function ResultCard(props) {
       <CardActions disableSpacing>
       {phone && 
         <Button aria-label="phone" onClick={() => {window.open("tel:+1" + phone)}}>
-            <PhoneIcon className={classes.icon} /> {phone}
+            <PhoneIcon className={classes.icon} /> {formatPhoneNumber(phone)}
         </Button>
       }
       {email && 
