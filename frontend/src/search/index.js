@@ -1,15 +1,25 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import TagDrawer from './TagDrawer';
 import Results from './Results';
 
+const useStyles = makeStyles(theme => ({
+	content: {
+		marginLeft: '300px'
+	}
+}));
+
 function Search() {
+	const classes = useStyles();
 
 	return(
-		<React.Fragment>
+		<div>
 			<TagDrawer />
-			<Results />
-		</React.Fragment>
+			<div className={classes.content}>
+				<Results />
+			</div>
+		</div>
 	);
 }
 
