@@ -25,6 +25,11 @@ namespace OwlLink.Controllers {
             return "";
         }
 
+        [HttpGet("resources/{id}")]
+        public string Get([FromBody] Resource resource) {
+
+        }
+
         // POST /
         [HttpPost("resource")]
         public String Post([FromBody]Resource resource) {

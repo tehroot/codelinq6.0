@@ -56,5 +56,9 @@ namespace OwlLink.Classes {
             NpgsqlDataReader reader = resources_command.ExecuteReader();
             return reader;
         }
+
+        public static NpgsqlDataReader readPrimaryTagsFromDb() {
+
+        }
     }
 }
