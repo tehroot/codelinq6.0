@@ -5,10 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Tag from './Tag';
 
 const drawerWidth = 240;
 
@@ -38,7 +35,7 @@ function TagDrawer() {
 			}}
 			>
 				<Toolbar></Toolbar>
-				
+				<Tag text="Hello world my dude" handleClick={() => {alert('test')}}/>
 				<Divider />
 			</Drawer>
 		</div>
