@@ -16,13 +16,12 @@ const useStyles = makeStyles(theme => ({
 
 function Tag(props) {
 	const classes = useStyles();
-	const { text, key, handleClick } = props;
+	const { text, handleClick } = props;
 
 	return(
 		<div className={classes.root}>
 			<Chip
 			label={text}
-			key={key}
 			onClick={handleClick}
 			className={classes.chip}
 			/>
