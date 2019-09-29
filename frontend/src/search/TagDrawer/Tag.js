@@ -22,6 +22,7 @@ function Tag(props) {
 		<div className={classes.root}>
 			<Chip
 			label={text}
+			key={key}
 			onClick={handleClick}
 			className={classes.chip}
 			/>
