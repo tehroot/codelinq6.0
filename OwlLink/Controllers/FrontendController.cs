@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace OwlLink.Controllers {
         [HttpGet]
         public string Get([FromBody]Resource resource) {
             return "Hello world";
+        }
+
+        [HttpGet("primary_tags")]
+        public string Get() {
+            return JsonConvert.SerializeObject(DatabaseConnector.readPrimaryTagsFromDb());
         }
 
         [HttpGet("resources/{id}")]

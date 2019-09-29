@@ -218,6 +218,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "Newtonsoft.Json >= 12.0.2",
       "Npgsql >= 4.1.0",
       "Npgsql.Json.NET >= 4.1.0",
       "System.Json >= 4.6.0",
@@ -263,6 +264,10 @@
     "frameworks": {
       "netcoreapp3.0": {
         "dependencies": {
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.2, )"
+          },
           "Npgsql": {
             "target": "Package",
             "version": "[4.1.0, )"

@@ -53,19 +53,26 @@ namespace OwlLink.Classes {
         public static NpgsqlDataReader readResourcesFromDb(Resource resource) {
             StringBuilder sb = new StringBuilder();
             List<int> tag_ids = resource.Type_Id;
-            foreach (int i in tag_ids) {
-                sb.Append("tag_id ="+i+" OR ");
-            }
-            String trimmed_last = sb.ToString().Remove(sb.ToString().Length - 4, sb.ToString().Length);
-            NpgsqlCommand resources_command = new NpgsqlCommand("SELECT resources.resource_id, resources.name, resources.description, resources.website, resources.address, resources.email, resources.phonenumber," +
-                "resources.state, resources.city, resources.zipcode, resources.requirements FROM public.resources INNER JOIN tagassign ON (resources.resource_id = tagassign.resource_id)" +
-                " WHERE "+trimmed_last+" GROUP BY resources.resource_id", returnConnection());
+            
+            NpgsqlCommand resources_command = new NpgsqlCommand("");
             NpgsqlDataReader reader = resources_command.ExecuteReader();
             return reader;
         }
 
-        public static NpgsqlDataReader readPrimaryTagsFromDb() {
-            throw new NotImplementedException();
+        public static Dictionary<int, String> readPrimaryTagsFromDb() {
+            Dictionary<int, String> keyValuePair = new Dictionary<int, String>();
+            try {
+                NpgsqlConnection conn = returnConnection();
+                NpgsqlCommand npgsqlCommand = new NpgsqlCommand("SELECT tag_id, tag_name FROM public.Tags");
+                NpgsqlDataReader reader = npgsqlCommand.ExecuteReader();
+                while (reader.HasRows) {
+                    keyValuePair.Add(int.Parse(reader[0].ToString()), reader[1].ToString());
+                }
+                return keyValuePair;
+            } catch (Exception e) {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }
