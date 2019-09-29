@@ -10,12 +10,12 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const newtags = [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}, {id: 3, text: 'tag 3'}, {id: 4, text: 'tag 4'}]
+const newtags = [{id: 1, text: 'communications'}, {id: 2, text: 'utilities'}, {id: 3, text: 'housing'}, {id: 4, text: 'housing_single'}]
 
 function Search() {
 	const classes = useStyles();
 
-	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'tag 1'}, {id: 2, text: 'tag 2'}], disabled: []}, state: 'DUMMY'});
+	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'communications'}, {id: 3, text: 'housing'}], disabled: []}, state: 'DUMMY'});
 
 	var AWS = require('aws-sdk');
 	AWS.config.accessKeyId = 'AKIA5QZNTKY2LZLBOOKM';
@@ -34,12 +34,15 @@ function Search() {
 			}
 			else {
 				setstatecode = state.state
-			} 
+			}
+
+			var alldata = [];
+
 			var params = {
 				TableName : "codelinc",
 				KeyConditionExpression: "#st = :st",
 				ExpressionAttributeNames: {
-					"#st": "State"
+					"#st": "State",
 				},
 				ExpressionAttributeValues: {
 					":st": setstatecode
@@ -52,10 +55,36 @@ function Search() {
 				console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
 			} else {
 				console.log("Query succeeded.");
-				setState({...state,state: setstatecode, carddata: data.Items});
+				alldata = data.Items;
 				console.log(data.Items)
 			}
-		});}
+		});
+		var params = {
+			TableName : "codelinc",
+			KeyConditionExpression: "#st = :st",
+			ExpressionAttributeNames: {
+				"#st": "State",
+			},
+			ExpressionAttributeValues: {
+				":st": "FED"
+			}
+		};
+		
+		docClient.query(params, function(err, data) {
+		
+		if (err) {
+			console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+		} else {
+			console.log("Query succeeded.");
+			console.log(alldata = alldata.concat(data.Items))
+			console.log(data.Items)
+			setState({...state,state: setstatecode, carddata: [...new Set(alldata)]});
+		}
+	});
+
+	
+
+	}
 
 	const enabletag = (id) => {
 		var newEnabled = state.tags.enabled;
