@@ -24,7 +24,7 @@ function Results() {
 		{title: "The Servant Center",
 		 addressline: "1312 Lexington Ave, Greensboro, NC 27403",
 		 description: "Our mission is to empower the homeless and disabled, particularly veterans, to become independent, contributing members of our community through housing, healthcare and restorative services.",
-		 phone: "+1 336 275 8585",
+		 phone: 3362758585,
 		 email: "info@theservantcenter.org",
 		 secondary_tags: "housingtype_single",
 		 eligibility: "Housing only available for singles.",

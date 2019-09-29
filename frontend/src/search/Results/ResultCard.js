@@ -85,16 +85,6 @@ export default function ResultCard(props) {
             <EmailIcon /> {email}
         </Button>
       }
-        <Button
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </Button>
       </CardActions>
     </Card>
   );
