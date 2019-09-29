@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Icon from '@material-ui/core/Icon';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import PhoneIcon from '@material-ui/icons/Phone';
+import EmailIcon from '@material-ui/icons/Email';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -69,12 +71,16 @@ export default function ResultCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button aria-label="add to favorites">
-          <FavoriteIcon />
+      {phone && 
+        <Button aria-label="phone" onClick={() => {window.open("tel:+1" + phone)}}>
+            <PhoneIcon /> {phone}
         </Button>
-        <Button aria-label="share">
-          <ShareIcon />
+      }
+      {email && 
+        <Button aria-label="email" onClick={() => {window.open("mailto:" + email)}}>
+            <PhoneIcon /> {email}
         </Button>
+      }
         <Button
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
