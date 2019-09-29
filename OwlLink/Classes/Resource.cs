@@ -13,13 +13,12 @@ namespace OwlLink.Classes {
         public int Zipcode { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string Requirements { get; set; }
 
         public Resource() {
 
         }
 
-        public Resource(List<int> resource_id, List<int> type_id, string name, string description, string address, string city, string state, int zipcode, int phonenumber, string email, string requirements) {
+        public Resource(List<int> resource_id, List<int> type_id, string name, string description, string address, string city, string state, int zipcode, int phonenumber, string email) {
             Resource_Id = resource_id;
             Type_Id = type_id;
             Name = name;
@@ -30,7 +29,6 @@ namespace OwlLink.Classes {
             Zipcode = zipcode;
             PhoneNumber = phonenumber;
             Email = email;
-            Requirements = requirements;
         }
 
         public Resource(List<int> resource_id, List<int> type_id) {

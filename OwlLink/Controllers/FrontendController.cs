@@ -8,7 +8,7 @@ using OwlLink.Classes;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OwlLink.Controllers {
-    [Route("[controller]"), Route("/");
+    [Route("[controller]"), Route("/")]
     public class FrontendController : Controller {
         Resource resource = new Resource();
 
