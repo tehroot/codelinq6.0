@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 function Results() {
 	const classes = useStyles();
 
+	//TODO call API here
 	const cardsarray = [
 		{title: "The Servant Center",
 		 addressline: "1312 Lexington Ave, Greensboro, NC 27403",
