@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ResultCard(props) {
   const classes = useStyles();
-  const {title, addressline, shortdesc} = props;
+  const {title, addressline, phone, email, website, eligibility, tags, description} = props;
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -65,7 +65,7 @@ export default function ResultCard(props) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p" align= "left">
-			{shortdesc}
+			{description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
