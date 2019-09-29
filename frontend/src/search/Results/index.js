@@ -38,7 +38,7 @@ function Results() {
 
 
 	return(
-		<div>
+		<div className={classes.root}>
 			{cardsarray.map(card =>
 				<ResultCard title={card.title}
 				addressline={card.addressline}
