@@ -18,22 +18,36 @@ const useStyles = makeStyles(theme => ({
 
 function Results(props) {
 	const classes = useStyles();
+	var {carddata, tags} = props;
 
-	var {carddata} = props;
+	const intersect = (a, b) => {
+		var filtered = a.filter((n) => {
+			return b.indexOf(n) > -1;
+		});
+		if (filtered.length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	return(
 		<React.Fragment>
-		{carddata.map((card) => (
-			<ResultCard title={card.title}
-			addressline={card.addressline}
-			phone={card.phone}
-			email={card.email}
-			tags={card.TypeTag}
-			eligibility={card.eligibility}
-			website={card.website}
-			description={card.description}
-			/>
-		))}</React.Fragment>
+			{carddata.map((card) => {
+				if (intersect(card.TypeTag, tags))
+				return(
+					<ResultCard title={card.title}
+					addressline={card.addressline}
+					phone={card.phone}
+					email={card.email}
+					tags={card.TypeTag}
+					eligibility={card.eligibility}
+					website={card.website}
+					description={card.description}
+					/>
+				)
+			})}
+		</React.Fragment>
 	);
 }
 

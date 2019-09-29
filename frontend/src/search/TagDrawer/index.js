@@ -85,14 +85,14 @@ function TagDrawer(props) {
 				<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
 				<div className={classes.tagWrapper}>
 					{enabledtags.map(tag =>
-						<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
+						<Tag text={tag} handleClick={() => {disabletag(tag)}}/>
 					)}
 				</div>
 				<Divider className={classes.tagHeader} />
 				<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
 				<div className={classes.tagWrapper}>
 					{disabledtags.map(tag =>
-						<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
+						<Tag text={tag} handleClick={() => {enabletag(tag)}}/>
 					)}
 				</div>
 			</Drawer>
