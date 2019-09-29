@@ -14,7 +14,6 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Icon from '@material-ui/core/Icon';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
@@ -56,7 +55,7 @@ export default function ResultCard(props) {
 		<Button variant="contained" color="primary" className={classes.button}>
 			Learn More
 			{/* This Button uses a Font Icon, see the installation instructions in the docs. */}
-			<Icon className={classes.OpenInNewIcon}>send</Icon>
+			<OpenInNewIcon>send</OpenInNewIcon>
 		</Button>
         }
         title = {title}
