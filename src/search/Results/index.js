@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ResultCard from './ResultCard';
@@ -32,22 +32,27 @@ function Results(props) {
 	}
 
 	return(
-		<React.Fragment>
+		<div className={classes.root}>
 			{carddata.map((card) => {
-				if (intersect(card.TypeTag, tags))
-				return(
-					<ResultCard title={card.title}
-					addressline={card.addressline}
-					phone={card.phone}
-					email={card.email}
-					tags={card.TypeTag}
-					eligibility={card.eligibility}
-					website={card.website}
-					description={card.description}
-					/>
-				)
+				if (intersect(card.TypeTag, tags)) {
+					return(
+						<ResultCard title={card.title}
+						addressline={card.addressline}
+						phone={card.phone}
+						email={card.email}
+						tags={card.TypeTag}
+						eligibility={card.eligibility}
+						website={card.website}
+						description={card.description}
+						/>
+					)
+				} else {
+					return(
+						<React.Fragment />
+					)
+				}
 			})}
-		</React.Fragment>
+		</div>
 	);
 }
 

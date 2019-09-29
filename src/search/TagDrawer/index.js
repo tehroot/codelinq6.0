@@ -72,7 +72,7 @@ function TagDrawer(props) {
 					displayEmpty
 					>
 						<MenuItem value="" disabled>
-							Select your state...
+							Select your state
 						</MenuItem>
 						{states.map((element) => {
 							return(<MenuItem value={element.id}>{element.name}</MenuItem>)
