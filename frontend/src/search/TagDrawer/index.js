@@ -39,11 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 function TagDrawer(props) {
 	const classes = useStyles();
-	const { enabledtags, disabledtags, enabletag, disabletag } = props;
-
-	const [state, setState] = useState({
-		state: ''
-	});
+	const { state, setState, enabledtags, disabledtags, enabletag, disabletag } = props;
 	
 	const handleChange = event => {
 		setState(oldValues => ({
@@ -53,46 +49,45 @@ function TagDrawer(props) {
 	};
 
 	return(
-		
-			<Drawer
-			className={classes.drawer}
-			variant="permanent"
-			classes={{
-				paper: classes.drawerPaper,
-			}}
-			>
-				<Toolbar></Toolbar>
+		<Drawer
+		className={classes.drawer}
+		variant="permanent"
+		classes={{
+			paper: classes.drawerPaper,
+		}}
+		>
+			<Toolbar></Toolbar>
 
-				<FormControl className={classes.stateSelect}>
-					<InputLabel htmlFor="state">State</InputLabel>
-					<Select
-					value={state.state}
-					onChange={handleChange}
-					inputProps={{
-						name: 'state',
-						id: 'state',
-					}}
-					>
-						{states.map((element) => {
-							return(<MenuItem value={element.id}>{element.name}</MenuItem>)
-						})}
-					</Select>
-				</FormControl>
+			<FormControl className={classes.stateSelect}>
+				<InputLabel htmlFor="state">State</InputLabel>
+				<Select
+				value={state.state}
+				onChange={handleChange}
+				inputProps={{
+					name: 'state',
+					id: 'state',
+				}}
+				>
+					{states.map((element) => {
+						return(<MenuItem value={element.id}>{element.name}</MenuItem>)
+					})}
+				</Select>
+			</FormControl>
 
-				<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
-				<div className={classes.tagWrapper}>
-					{enabledtags.map(tag =>
-						<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
-					)}
-				</div>
-				<Divider className={classes.tagHeader} />
-				<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
-				<div className={classes.tagWrapper}>
-					{disabledtags.map(tag =>
-						<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
-					)}
-				</div>
-			</Drawer>
+			<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
+			<div className={classes.tagWrapper}>
+				{enabledtags.map(tag =>
+					<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
+				)}
+			</div>
+			<Divider className={classes.tagHeader} />
+			<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
+			<div className={classes.tagWrapper}>
+				{disabledtags.map(tag =>
+					<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
+				)}
+			</div>
+		</Drawer>
 	);
 };
 
