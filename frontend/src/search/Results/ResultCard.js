@@ -53,16 +53,18 @@ export default function ResultCard(props) {
         action={
 			// call to action button
 		<Button variant="contained" color="primary" className={classes.button}>
-			Learn More
+			<Typography>Learn More</Typography>
 			{/* This Button uses a Font Icon, see the installation instructions in the docs. */}
 			<OpenInNewIcon>send</OpenInNewIcon>
 		</Button>
         }
-        title = {title}
-        subheader = {addressline}
+		title = {title}
+		titleTypographyProps = {{align: 'left'}}
+		subheader = {addressline}
+		subheaderTypographyProps = {{align: 'left'}}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component="p" align= "left">
 			{shortdesc}
         </Typography>
       </CardContent>
