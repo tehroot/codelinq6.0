@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="4.1.0" />
     <PackageReference Include="Npgsql.Json.NET" Version="4.1.0" />
+    <PackageReference Include="System.Json" Version="4.6.0" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />

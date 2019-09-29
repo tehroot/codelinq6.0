@@ -46,6 +46,14 @@
             "Npgsql.Json.NET": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "System.Json": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             }
           },
           "imports": [
