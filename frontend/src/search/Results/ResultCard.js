@@ -25,18 +25,14 @@ const useStyles = makeStyles(theme => ({
 	minWidth: "90%",
 	margin: "1em",
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   button: {
 	  margin: '10px'
+  },
+  emailButton: {
+    textTransform: "none"
+  },
+  icon: {
+    marginRight: '5px'
   }
 }));
 
@@ -77,12 +73,12 @@ export default function ResultCard(props) {
       <CardActions disableSpacing>
       {phone && 
         <Button aria-label="phone" onClick={() => {window.open("tel:+1" + phone)}}>
-            <PhoneIcon /> {phone}
+            <PhoneIcon className={classes.icon} /> {phone}
         </Button>
       }
       {email && 
-        <Button aria-label="email" onClick={() => {window.open("mailto:" + email)}}>
-            <EmailIcon /> {email}
+        <Button aria-label="email" className={classes.emailButton} onClick={() => {window.open("mailto:" + email)}}>
+            <EmailIcon className={classes.icon} /> {email}
         </Button>
       }
       </CardActions>
