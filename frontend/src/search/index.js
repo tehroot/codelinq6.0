@@ -15,22 +15,18 @@ const newtags = [{id: 1, text: 'communications'}, {id: 2, text: 'utilities'}, {i
 function Search() {
 	const classes = useStyles();
 
-	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'communications'}, {id: 3, text: 'housing'}], disabled: []}, state: 'DUMMY'});
+	const [state, setState] = useState({carddata: [], tags: {enabled: [{id: 1, text: 'communications'}, {id: 3, text: 'housing'}], disabled: []}, state: ''});
 
 	var AWS = require('aws-sdk');
 	AWS.config.accessKeyId = 'AKIA5QZNTKY2LZLBOOKM';
 	AWS.config.secretAccessKey = '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';
 	AWS.config.region = 'us-east-1';
-
-	var result = {Items: []};
 	
 		var docClient = new AWS.DynamoDB.DocumentClient();
 		var query = (statecode) => {
 			var setstatecode = ''
 			if (statecode) {
 				setstatecode = statecode;
-			} else if (statecode === 'DUMMY'){
-				return;
 			}
 			else {
 				setstatecode = state.state
