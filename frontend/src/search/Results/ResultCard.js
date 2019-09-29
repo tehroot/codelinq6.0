@@ -82,7 +82,7 @@ export default function ResultCard(props) {
       }
       {email && 
         <Button aria-label="email" onClick={() => {window.open("mailto:" + email)}}>
-            <PhoneIcon /> {email}
+            <EmailIcon /> {email}
         </Button>
       }
         <Button
