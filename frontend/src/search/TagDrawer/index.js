@@ -7,15 +7,11 @@ import Divider from '@material-ui/core/Divider';
 
 import Tag from './Tag';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles(theme => ({
-	root: {
-		display: 'flex',
-	},
 	drawer: {
 		width: drawerWidth,
-		flexShrink: 0,
 	},
 	drawerPaper: {
 		width: drawerWidth,
@@ -26,7 +22,7 @@ function TagDrawer() {
 	const classes = useStyles();
 
 	return(
-		<div className={classes.root}>
+		
 			<Drawer
 			className={classes.drawer}
 			variant="permanent"
@@ -35,10 +31,9 @@ function TagDrawer() {
 			}}
 			>
 				<Toolbar></Toolbar>
-				<Tag text="Hello world my dude" handleClick={() => {alert('test')}}/>
+				<Tag text="testing tags" handleClick={() => {alert('test')}}/>
 				<Divider />
 			</Drawer>
-		</div>
 	);
 };
 
