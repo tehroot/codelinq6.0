@@ -66,6 +66,10 @@ export default function ResultCard(props) {
 		subheaderTypographyProps = {{align: 'left'}}
       />
       <CardContent>
+        {eligibility &&
+        <Typography variant="body2" color="textPrimary" component="p" gutterBottom="0.2em" align= "left">
+          <b>Eligibility:</b> {eligibility}
+        </Typography>}
         <Typography variant="body2" color="textSecondary" component="p" align= "left">
 			{description}
         </Typography>
