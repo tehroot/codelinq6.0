@@ -19,10 +19,9 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const useStyles = makeStyles(theme => ({
   card: {
-	width: "100%",
-	minWidth: "100%",
-	margin: "1em",
-  },
+	width: "65em",
+	margin: "0.5em",
+  }, 
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -40,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ResultCard(props) {
   const classes = useStyles();
-  const {title, addressline, shortdesc} = props;
+  const {title, addressline, phone, email, website, eligibility, tags, description} = props;
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -65,7 +64,7 @@ export default function ResultCard(props) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p" align= "left">
-			{shortdesc}
+			{description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
