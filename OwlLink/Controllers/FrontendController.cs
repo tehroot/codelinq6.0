@@ -8,26 +8,31 @@ using OwlLink.Classes;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OwlLink.Controllers {
-    [Route("[controller]"), Route("/")]
+    [Route("[controller]"), Route("/");
     public class FrontendController : Controller {
+        Resource resource = new Resource();
 
 
         // GET: /
         [HttpGet]
         public string Get() {
-            return "Big Dumb";
+            return "Hello world";
         }
 
-        // GET /5
-        [HttpGet("{id}")]
-        public string Get(int id) {
-            return "hey";
+        // GET /resource
+        [HttpGet("resources")]
+        public string Get([FromBody]Resource resource) {
+            return "";
         }
 
         // POST /
         [HttpPost("resource")]
-        public void Post([FromBody]Resource resource) {
-
+        public String Post([FromBody]Resource resource) {
+            if (resource.createResource(resource)) {
+                return "Success";
+            } else {
+                return "False";
+            }
         }
 
         // PUT /5
