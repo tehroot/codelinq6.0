@@ -1,9 +1,24 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import ResultCard from './ResultCard';
 import { Card } from '@material-ui/core';
 
+const useStyles = makeStyles(theme => ({
+	root: {
+		display: 'flex',
+		flexWrap: 'wrap',
+
+		justifyContent: 'center',
+		alignItems: 'center',
+		textAlign: 'center',
+
+		marginTop: '20px'
+	}
+}));
+
 function Results() {
+	const classes = useStyles();
 
 	const cardsarray = [
 		{title: "The Servant Center",

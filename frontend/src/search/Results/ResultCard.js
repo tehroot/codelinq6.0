@@ -19,9 +19,10 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const useStyles = makeStyles(theme => ({
   card: {
-	width: "65em",
-	margin: "0.5em",
-  }, 
+	width: "90%",
+	minWidth: "90%",
+	margin: "1em",
+  },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -32,9 +33,9 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  button: {
+	  margin: '10px'
+  }
 }));
 
 export default function ResultCard(props) {
@@ -51,11 +52,11 @@ export default function ResultCard(props) {
       <CardHeader
         action={
 			// call to action button
-		<Button variant="contained" color="primary" className={classes.button}>
-			<Typography>Learn More</Typography>
-			{/* This Button uses a Font Icon, see the installation instructions in the docs. */}
-			<OpenInNewIcon>send</OpenInNewIcon>
-		</Button>
+			<Button variant="contained" color="primary" className={classes.button}>
+				<Typography>Learn More</Typography>
+				{/* This Button uses a Font Icon, see the installation instructions in the docs. */}
+				<OpenInNewIcon>send</OpenInNewIcon>
+			</Button>
         }
 		title = {title}
 		titleTypographyProps = {{align: 'left'}}
