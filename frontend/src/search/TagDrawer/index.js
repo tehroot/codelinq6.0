@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -53,16 +53,14 @@ function TagDrawer(props) {
 	};
 
 	return(
-		
-			<Drawer
-			className={classes.drawer}
-			variant="permanent"
-			classes={{
-				paper: classes.drawerPaper,
-			}}
-			>
-				<Toolbar></Toolbar>
-
+		<Drawer
+		className={classes.drawer}
+		variant="permanent"
+		classes={{
+			paper: classes.drawerPaper,
+		}}
+		>
+			<Toolbar></Toolbar>
 				<FormControl className={classes.stateSelect}>
 					<Select
 					value={state.state}

@@ -107,6 +107,7 @@ function Search() {
 
 		var newEnabled = state.tags.enabled.filter((element) => {
 			return element !== tag;
+
 		});
 		
 		setState({...state, tags: {enabled: newEnabled, disabled: newDisabled}});

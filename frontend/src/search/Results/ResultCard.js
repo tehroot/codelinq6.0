@@ -46,12 +46,14 @@ export default function ResultCard(props) {
     <Card className={classes.card}>
       <CardHeader
         action={
-			// call to action button
+      // call to action button
+      <React.Fragment>{ website &&
 			<Button variant="contained" color="primary" className={classes.button} onClick={() => {window.open(website)}}>
 				<Typography>Learn More</Typography>
 				{/* This Button uses a Font Icon, see the installation instructions in the docs. */}
 				<OpenInNewIcon>send</OpenInNewIcon>
-			</Button>
+      </Button>
+      }</React.Fragment>
         }
 		title = {title}
 		titleTypographyProps = {{align: 'left'}}
