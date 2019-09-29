@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -74,6 +74,7 @@ function TagDrawer(props) {
 				</Select>
 			</FormControl>
 
+			{state.state && <React.Fragment>
 			<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
 			<div className={classes.tagWrapper}>
 				{enabledtags.map(tag =>
@@ -87,6 +88,7 @@ function TagDrawer(props) {
 					<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
 				)}
 			</div>
+			</React.Fragment>}
 		</Drawer>
 	);
 };
