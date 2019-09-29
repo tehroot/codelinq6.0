@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 
 import Tag from './Tag';
+import { Typography } from '@material-ui/core';
 
 const drawerWidth = 300;
 
@@ -16,10 +17,20 @@ const useStyles = makeStyles(theme => ({
 	drawerPaper: {
 		width: drawerWidth,
 	},
+	tagWrapper: {
+		display: 'flex',
+		flex: 'wrap',
+		padding: '5px'
+	},
+	tagHeader: {
+		marginTop: '15px'
+	}
 }));
 
-function TagDrawer() {
+function TagDrawer(props) {
 	const classes = useStyles();
+
+	const { enabledtags, disabledtags, enabletag, disabletag } = props;
 
 	return(
 		
@@ -31,8 +42,19 @@ function TagDrawer() {
 			}}
 			>
 				<Toolbar></Toolbar>
-				<Tag text="testing tags" handleClick={() => {alert('test')}}/>
-				<Divider />
+				<Typography className={classes.tagHeader} variant="h6">Enabled Tags</Typography>
+				<div className={classes.tagWrapper}>
+					{enabledtags.map(tag =>
+						<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
+					)}
+				</div>
+				<Divider className={classes.tagHeader} />
+				<Typography className={classes.tagHeader} variant="h6">Disabled Tags</Typography>
+				<div className={classes.tagWrapper}>
+					{disabledtags.map(tag =>
+						<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
+					)}
+				</div>
 			</Drawer>
 	);
 };
