@@ -8,4 +8,13 @@
     <PackageReference Include="Npgsql" Version="4.1.0" />
     <PackageReference Include="Npgsql.Json.NET" Version="4.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\DatabaseController.cs" />
+    <Compile Remove="Controllers\VaApiController.cs" />
+    <Compile Remove="Classes\VaApiConnector.cs" />
+  </ItemGroup>
 </Project>
