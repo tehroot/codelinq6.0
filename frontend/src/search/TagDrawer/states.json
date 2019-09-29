@@ -1,6 +1,14 @@
 [
 	{
+		"name": "Maryland",
+		"id": "MD"
+	},
+	{
 		"name": "North Carolina",
 		"id": "NC"
+	},
+	{
+		"name": "Pennsylvania",
+		"id": "PA"
 	}
 ]

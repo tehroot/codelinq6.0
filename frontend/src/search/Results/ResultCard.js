@@ -31,6 +31,17 @@ export default function ResultCard(props) {
   const classes = useStyles();
   const {title, addressline, phone, email, website, eligibility, description} = props;
 
+  /* https://stackoverflow.com/a/8358141 */
+  function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      var intlCode = (match[1] ? '+1 ' : '')
+      return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+    }
+    return null
+  }
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -61,7 +72,7 @@ export default function ResultCard(props) {
       <CardActions disableSpacing>
       {phone && 
         <Button aria-label="phone" onClick={() => {window.open("tel:+1" + phone)}}>
-            <PhoneIcon className={classes.icon} /> {phone}
+            <PhoneIcon className={classes.icon} /> {formatPhoneNumber(phone)}
         </Button>
       }
       {email && 

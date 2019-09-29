@@ -8,7 +8,6 @@ import Divider from '@material-ui/core/Divider';
 import Tag from './Tag';
 import { Typography } from '@material-ui/core';
 
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -26,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	tagWrapper: {
 		display: 'flex',
-		flex: 'wrap',
+		flexWrap: 'wrap',
 		padding: '10px'
 	},
 	tagHeader: {
@@ -39,9 +38,14 @@ const useStyles = makeStyles(theme => ({
 
 function TagDrawer(props) {
 	const classes = useStyles();
-	const { state, setState, enabledtags, disabledtags, enabletag, disabletag } = props;
+	const { state, setState, enabledtags, disabledtags, enabletag, disabletag, query } = props;
 	
 	const handleChange = event => {
+		if (event.target.name === 'state') {
+			query(event.target.value);
+		} else {
+			query();
+		}
 		setState(oldValues => ({
 			...oldValues,
 			[event.target.name]: event.target.value,
@@ -57,39 +61,39 @@ function TagDrawer(props) {
 		}}
 		>
 			<Toolbar></Toolbar>
+				<FormControl className={classes.stateSelect}>
+					<Select
+					value={state.state}
+					onChange={handleChange}
+					inputProps={{
+						name: 'state',
+						id: 'state',
+					}}
+					displayEmpty
+					>
+						<MenuItem value="" disabled>
+							Select your state...
+						</MenuItem>
+						{states.map((element) => {
+							return(<MenuItem value={element.id}>{element.name}</MenuItem>)
+						})}
+					</Select>
+				</FormControl>
 
-			<FormControl className={classes.stateSelect}>
-				<InputLabel htmlFor="state">State</InputLabel>
-				<Select
-				value={state.state}
-				onChange={handleChange}
-				inputProps={{
-					name: 'state',
-					id: 'state',
-				}}
-				>
-					{states.map((element) => {
-						return(<MenuItem value={element.id}>{element.name}</MenuItem>)
-					})}
-				</Select>
-			</FormControl>
-
-			{state.state && <React.Fragment>
-			<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
-			<div className={classes.tagWrapper}>
-				{enabledtags.map(tag =>
-					<Tag text={tag.text} handleClick={() => {disabletag(tag.id)}}/>
-				)}
-			</div>
-			<Divider className={classes.tagHeader} />
-			<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
-			<div className={classes.tagWrapper}>
-				{disabledtags.map(tag =>
-					<Tag text={tag.text} handleClick={() => {enabletag(tag.id)}}/>
-				)}
-			</div>
-			</React.Fragment>}
-		</Drawer>
+				<Typography className={classes.tagHeader} variant="h6">Enabled Filters</Typography>
+				<div className={classes.tagWrapper}>
+					{enabledtags.map(tag =>
+						<Tag text={tag} handleClick={() => {disabletag(tag)}}/>
+					)}
+				</div>
+				<Divider className={classes.tagHeader} />
+				<Typography className={classes.tagHeader} variant="h6">Disabled Filters</Typography>
+				<div className={classes.tagWrapper}>
+					{disabledtags.map(tag =>
+						<Tag text={tag} handleClick={() => {enabletag(tag)}}/>
+					)}
+				</div>
+			</Drawer>
 	);
 };
 

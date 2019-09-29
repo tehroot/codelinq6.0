@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	bar: {
 		background: theme.palette.bar.main,
-		zIndex: theme.zIndex.drawer + 1
+		zIndex: theme.zIndex.drawer + 1,
+		position: 'fixed'
 	},
 	title: {
 		flexGrow: 1,

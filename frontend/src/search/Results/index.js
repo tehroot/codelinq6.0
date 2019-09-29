@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ResultCard from './ResultCard';
@@ -16,40 +16,38 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Results() {
+function Results(props) {
 	const classes = useStyles();
+	var {carddata, tags} = props;
 
-	//TODO call API here
-	const cardsarray = [
-		{title: "The Servant Center",
-		 addressline: "1312 Lexington Ave, Greensboro, NC 27403",
-		 description: "Our mission is to empower the homeless and disabled, particularly veterans, to become independent, contributing members of our community through housing, healthcare and restorative services.",
-		 phone: 3362758585,
-		 email: "info@theservantcenter.org",
-		 secondary_tags: "housingtype_single",
-		 eligibility: "Housing only available for singles.",
-		 website: "https://theservantcenter.org"},
-		{title: "Lifeline",
-		 addressline: "Nationwide",
-		 description: "The Lifeline Program enables wireless and wired phone and internet providers to provide discount service to low income Americans. This is a great way to get the connection you need for job and benefit applications and stay in touch with your families. Click Learn More to check eligibility.",
-		 eligibility: "Qualify with low income, SNAP, or other benefits.",
-		 website: "https://checklifeline.org"}
-		]
-
+	const intersect = (a, b) => {
+		var filtered = a.filter((n) => {
+			return b.indexOf(n) > -1;
+		});
+		if (filtered.length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	return(
-		<div className={classes.root}>
-			{cardsarray.map(card =>
-				<ResultCard title={card.title}
-				addressline={card.addressline}
-				phone={card.phone}
-				email={card.email}
-				tags={card.secondary_tags}
-				eligibility={card.eligibility}
-				website={card.website}
-				description={card.description}
-				/>)}
-		</div>
+		<React.Fragment>
+			{carddata.map((card) => {
+				if (intersect(card.TypeTag, tags))
+				return(
+					<ResultCard title={card.title}
+					addressline={card.addressline}
+					phone={card.phone}
+					email={card.email}
+					tags={card.TypeTag}
+					eligibility={card.eligibility}
+					website={card.website}
+					description={card.description}
+					/>
+				)
+			})}
+		</React.Fragment>
 	);
 }
 
