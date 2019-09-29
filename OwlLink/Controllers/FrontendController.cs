@@ -15,25 +15,21 @@ namespace OwlLink.Controllers {
 
         // GET: /
         [HttpGet]
-        public string Get() {
+        public string Get([FromBody]Resource resource) {
             return "Hello world";
         }
 
-        // GET /resource
-        [HttpGet("resources")]
-        public string Get([FromBody]Resource resource) {
-            return "";
-        }
-
         [HttpGet("resources/{id}")]
-        public string Get([FromBody] Resource resource) {
-
+        public string Get(int id) {
+            return "AAAA";
         }
 
         // POST /
         [HttpPost("resource")]
         public String Post([FromBody]Resource resource) {
-            if (resource.createResource(resource)) {
+            List<int> types = resource.Type_Id;
+
+            if (resource.createResource(resource, types)) {
                 return "Success";
             } else {
                 return "False";

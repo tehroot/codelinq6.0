@@ -16,12 +16,12 @@ namespace OwlLink.Classes {
             return conn;
         }
 
-        public static Boolean writeResourceToDb(Resource resource) {
+        public static Boolean writeResourceToDb(Resource resource, List<int> types) {
             NpgsqlConnection conn = returnConnection();
             conn.Open();
+            int rowAffected = 0;
             try {
-                NpgsqlCommand resources_command = new NpgsqlCommand("INSERT INTO public.resources (name, description, website, address, email, phonenumber, state, city, zipcode) VALUES (@name,@description,@website,@address,@email,@phonenumber,@state,@city,@zipcode)", conn);
-                NpgsqlCommand tagassign_command = new NpgsqlCommand("INSERT INTO public.tagassign (resource_id, tag_id) VALUES (@resource_id, @tag_id)", conn);
+                NpgsqlCommand resources_command = new NpgsqlCommand("INSERT INTO public.resources (name, description, website, address, email, phonenumber, state, city, zipcode) VALUES (@name,@description,@website,@address,@email,@phonenumber,@state,@city,@zipcode) RETURNING resource_id", conn);
                 resources_command.Parameters.AddWithValue("name", resource.Name);
                 resources_command.Parameters.AddWithValue("description", resource.Description);
                 resources_command.Parameters.AddWithValue("website", resource.Website);
@@ -31,8 +31,15 @@ namespace OwlLink.Classes {
                 resources_command.Parameters.AddWithValue("state", resource.State);
                 resources_command.Parameters.AddWithValue("city", resource.City);
                 resources_command.Parameters.AddWithValue("zipcode", resource.Zipcode);
-                int resource_rows = resources_command.ExecuteNonQuery();
-                if (resource_rows > 0) {
+                Object row = resources_command.ExecuteScalar();
+                Debug.WriteLine(row);
+                for(int i = 0; i < types.Count; i++) {
+                    NpgsqlCommand tagassign_command = new NpgsqlCommand("INSERT INTO public.tagassign (resource_id, tag_id) VALUES (@resource_id, @tag_id)", conn);
+                    tagassign_command.Parameters.AddWithValue("resource_id",int.Parse(row.ToString()));
+                    tagassign_command.Parameters.AddWithValue("tag_id", types[i]);
+                    rowAffected = tagassign_command.ExecuteNonQuery();
+                }
+                if (rowAffected > 0) {
                     return true;
                 } else {
                     return false;
@@ -58,7 +65,7 @@ namespace OwlLink.Classes {
         }
 
         public static NpgsqlDataReader readPrimaryTagsFromDb() {
-
+            throw new NotImplementedException();
         }
     }
 }

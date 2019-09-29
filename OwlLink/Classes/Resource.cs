@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace OwlLink.Classes {
     public class Resource {
-        public List<int> Resource_Id { get; set; }
+        public int Resource_Id { get; set; }
         public List<int> Type_Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,7 +18,7 @@ namespace OwlLink.Classes {
 
         }
 
-        public Resource(List<int> resource_id, List<int> type_id, string name, string description, string address, string city, string state, int zipcode, int phonenumber, string email) {
+        public Resource(int resource_id, List<int> type_id, string name, string description, string address, string city, string state, int zipcode, int phonenumber, string email) {
             Resource_Id = resource_id;
             Type_Id = type_id;
             Name = name;
@@ -31,13 +31,13 @@ namespace OwlLink.Classes {
             Email = email;
         }
 
-        public Resource(List<int> resource_id, List<int> type_id) {
+        public Resource(int resource_id, List<int> type_id) {
             Resource_Id = resource_id;
             Type_Id = type_id;
         }
 
-        public Boolean createResource(Resource resource) {
-            return DatabaseConnector.writeResourceToDb(resource);
+        public Boolean createResource(Resource resource, List<int> types) {
+            return DatabaseConnector.writeResourceToDb(resource, types);
         }
 
     }
