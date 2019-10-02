@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar } from '@material-ui/core';
 
-import { Typography, Button } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 import 'typeface-zilla-slab';
 
@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	bar: {
 		background: theme.palette.bar.main,
-		zIndex: theme.zIndex.drawer + 1
+		zIndex: theme.zIndex.drawer + 1,
+		position: 'fixed'
 	},
 	title: {
 		flexGrow: 1,
@@ -39,8 +40,6 @@ function Bar() {
 					<Typography variant="h6" className={classes.title}>
 						NarrowDown
 					</Typography>
-					<Button className={classes.navButton}><Typography className={classes.navButtonText} variant="h6">Home</Typography></Button>
-					<Button className={classes.navButton}><Typography className={classes.navButtonText} variant="h6">About</Typography></Button>
 				</Toolbar>
 			</AppBar>
 		</div>
