@@ -9,7 +9,7 @@
     <PackageReference Include="Npgsql.Json.NET" Version="4.1.0" />
     <PackageReference Include="System.Json" Version="4.6.0" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
